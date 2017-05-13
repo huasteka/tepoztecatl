@@ -19,5 +19,13 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+pt:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: Houve um erro na sua requisição
+      models:
+        storage:
+          attributes:
+            name: O nome não pode estar vazio
+            code: O código não pode estar vazio

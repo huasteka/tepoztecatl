@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :storages, path: '/api/v1/storages'
+  scope :v1 do
+    resources :storages
+    resources :measure_units
+  end
+  match '*path' => redirect('/'), via: :all
 end

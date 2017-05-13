@@ -12,7 +12,7 @@ development:
 
 production:
   <<: *default
-  database: tepoztecatl_production
+  database: <%= ENV['DATABASE_NAME'] %>
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
 

@@ -4,6 +4,8 @@ class CreateStorages < ActiveRecord::Migration[5.0]
       t.string :code
       t.string :name
       t.references :parent, index: true, null: true
+
+      t.timestamps
     end
   end
 end
