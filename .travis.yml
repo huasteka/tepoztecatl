@@ -1,10 +1,9 @@
 language: ruby
 rvm:
-  - 2.2.4p230
+  - 2.2.2
+  - jruby
 env:
   - RAILS_ENV=test
-before_install:
-  - gem install rack
 services:
   - postgresql
 before_script:
