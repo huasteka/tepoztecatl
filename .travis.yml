@@ -3,6 +3,8 @@ rvm:
   - 2.2
 env:
   - RAILS_ENV=test
+before_install:
+  - gem install rack
 services:
   - postgresql
 before_script:
