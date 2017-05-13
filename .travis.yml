@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.2
+  - 2.2.4p230
 env:
   - RAILS_ENV=test
 before_install:
