@@ -1,7 +1,6 @@
 language: ruby
 rvm:
   - 2.2.2
-  - jruby
 env:
   - RAILS_ENV=test
 services:
