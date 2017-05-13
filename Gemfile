@@ -35,6 +35,7 @@ group :development do
 end
 
 group :test do
+  gem 'rack', '~> 2.0.2'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker'
