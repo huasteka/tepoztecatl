@@ -39,7 +39,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
-    bcrypt (3.1.11)
+    bcrypt (3.1.11-x64-mingw32)
     builder (3.2.3)
     concurrent-ruby (1.0.5)
     database_cleaner (1.6.1)
@@ -70,9 +70,9 @@ GEM
     minitest (5.10.2)
     multi_json (1.12.1)
     nio4r (2.0.0)
-    nokogiri (1.7.2)
+    nokogiri (1.7.2-x64-mingw32)
       mini_portile2 (~> 2.1.0)
-    pg (0.20.0)
+    pg (0.20.0-x64-mingw32)
     postgresql (1.0.0)
       pg
     puma (3.8.2)
@@ -140,7 +140,7 @@ GEM
     websocket-extensions (0.1.2)
 
 PLATFORMS
-  ruby
+  x64-mingw32
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
