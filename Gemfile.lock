@@ -39,7 +39,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
-    bcrypt (3.1.11-x64-mingw32)
+    bcrypt (3.1.11)
     builder (3.2.3)
     concurrent-ruby (1.0.5)
     database_cleaner (1.6.1)
@@ -70,9 +70,9 @@ GEM
     minitest (5.10.2)
     multi_json (1.12.1)
     nio4r (2.0.0)
-    nokogiri (1.7.2-x64-mingw32)
+    nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
-    pg (0.20.0-x64-mingw32)
+    pg (0.20.0)
     postgresql (1.0.0)
       pg
     puma (3.8.2)
@@ -140,19 +140,19 @@ GEM
     websocket-extensions (0.1.2)
 
 PLATFORMS
-  x64-mingw32
+  ruby
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
-  database_cleaner
+  database_cleaner (= 1.6.1)
   factory_girl_rails (~> 4.0)
-  faker
+  faker (= 1.7.3)
   jbuilder (~> 2.5)
-  postgresql
+  postgresql (= 1.0.0)
   puma (~> 3.0)
   rails (~> 5.0.2)
-  rake
+  rake (= 12.0.0)
   rspec-rails (~> 3.5)
   shoulda-matchers (~> 3.1)
   tzinfo-data

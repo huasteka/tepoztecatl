@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use PostgreSQL as the database for Active Record
-gem 'postgresql'
+gem 'postgresql', '1.0.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -35,11 +35,11 @@ group :development do
 end
 
 group :test do
-  gem 'rake'
+  gem 'rake', '12.0.0'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'
-  gem 'faker'
-  gem 'database_cleaner'
+  gem 'faker', '1.7.3'
+  gem 'database_cleaner', '1.6.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
