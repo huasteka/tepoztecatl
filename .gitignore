@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 .idea/
 /db/schema.rb
-Gemfile.lock
+
 
 # Ignore bundler config.
 /.bundle
