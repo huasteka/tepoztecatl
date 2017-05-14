@@ -3,4 +3,5 @@ class Storage < ApplicationRecord
   belongs_to :parent, class_name: 'Storage', optional: true
 
   validates_presence_of :code, :name
+  validates_uniqueness_of :code
 end

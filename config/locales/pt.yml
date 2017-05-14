@@ -23,9 +23,20 @@ pt:
   activerecord:
     errors:
       messages:
-        record_invalid: Houve um erro na sua requisição
+        record_invalid: Houve um erro na sua requisição #{errors}
       models:
         storage:
           attributes:
             name: O nome não pode estar vazio
             code: O código não pode estar vazio
+        measure_unit:
+          attributes:
+            name: O nome não pode estar vazio
+            acronym: A sigla não pode estar vazia
+        item:
+          attributes:
+            code: O código não pode estar vazio
+            input_quantity: A quantidade de entrada não pode estar vazia
+            output_quantity: A quantidade de saída não pode estar vazia
+            input_measure_unit: É necessário informar a unidade de medida de entrada
+            output_measure_unit: É necessário informar a unidade de medida de saída
