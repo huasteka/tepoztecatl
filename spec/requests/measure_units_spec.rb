@@ -1,12 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'Measure Units API', type: :request do
+  # Initialize authorization header
+  let(:user_id) { Faker::Number.digit }
+  let(:headers) { valid_headers }
+
   # Initialize test data
   let!(:measure_units) { create_list(:measure_unit, 10) }
   let(:measure_unit_id) { measure_units.first.id }
 
   describe 'GET /api/v1/measure_units' do
-    before { get '/api/v1/measure_units' }
+    before { get '/api/v1/measure_units', params: {}, headers: headers }
 
     it 'returns measure_units' do
       expect(json).not_to be_empty
@@ -18,7 +22,7 @@ RSpec.describe 'Measure Units API', type: :request do
   end
 
   describe 'GET /api/v1/measure_units/:measure_unit_id' do
-    before { get "/api/v1/measure_units/#{measure_unit_id}" }
+    before { get "/api/v1/measure_units/#{measure_unit_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the measure_unit' do
@@ -44,7 +48,7 @@ RSpec.describe 'Measure Units API', type: :request do
     let(:valid_attributes) { {name: 'First', acronym: '1ST'} }
 
     context 'when the request is valid' do
-      before { post '/api/v1/measure_units', params: valid_attributes }
+      before { post '/api/v1/measure_units', params: valid_attributes, headers: headers }
 
       it 'creates a measure_unit' do
         expect(json['result']['name']).to eq('First')
@@ -57,7 +61,7 @@ RSpec.describe 'Measure Units API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/measure_units', params: {name: 'Fail'} }
+      before { post '/api/v1/measure_units', params: {name: 'Fail'}, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -69,7 +73,7 @@ RSpec.describe 'Measure Units API', type: :request do
     let(:valid_attributes) { {name: 'Second', acronym: '2ND'} }
 
     context 'when the record exists' do
-      before { put "/api/v1/measure_units/#{measure_unit_id}", params: valid_attributes }
+      before { put "/api/v1/measure_units/#{measure_unit_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -82,7 +86,7 @@ RSpec.describe 'Measure Units API', type: :request do
   end
 
   describe 'DELETE /api/v1/measure_units/:measure_unit_id' do
-    before { delete "/api/v1/measure_units/#{measure_unit_id}" }
+    before { delete "/api/v1/measure_units/#{measure_unit_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

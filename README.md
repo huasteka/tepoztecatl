@@ -1,22 +1,57 @@
+# Tepoztecatl
+
 [![Travis](https://img.shields.io/travis/murilocosta/tepoztecatl.svg?style=flat-square)](https://travis-ci.org/murilocosta/tepoztecatl)
 [![GitHub issues](https://img.shields.io/github/issues/murilocosta/tepoztecatl.svg?style=flat-square)](https://github.com/murilocosta/tepoztecatl/issues)
 [![Code Climate](https://img.shields.io/codeclimate/github/murilocosta/tepoztecatl.svg?style=flat-square)](https://codeclimate.com/github/murilocosta/tepoztecatl)
 [![Codecov](https://img.shields.io/codecov/c/github/murilocosta/tepoztecatl.svg?style=flat-square)](https://codecov.io/gh/murilocosta/tepoztecatl)
 
-# Tepoztecatl - A simple API for optimal inventory control 
+Tepoztecatl is an open source simple API for optimal inventory control developed with [Ruby on Rails](http://rubyonrails.org).
 
-* Ruby version
+## Setup
 
-* System dependencies
+- [PostgreSQL](http://www.postgresql.org) (>= 9.3)
+- [Ruby](https://www.ruby-lang.org/en) (>= 2.2.4)
 
-* Configuration
+After installing **Ruby**, open a terminal and run this command to install [Bundler](http://bundler.io/):
 
-* Database creation
+```
+gem install bundler
+```
 
-* Database initialization
+## Installation
 
-* How to run the test suite
+To download and build the project, open a terminal and execute:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+git clone https://github.com/murilocosta/tepoztecatl.git
+cd tepoztecatl
+bundle install
+```
 
-* Deployment instructions
+To serve the project run: `rails s` the application will be served at `http://localhost:3000`.
+
+## Configuration
+
+To configure database credentials modify `config/database.yml` file:
+
+```
+[environment]:
+  <<: *default
+  database: [database_name]
+  username: [database_user]
+  password: [database_password]
+```
+
+## Tests
+
+To execute all tests, open a terminal and execute:
+
+```
+bundle exec rspec
+```
+
+## License
+
+Tepoztecatl is Copyright © 2017 Murilo Costa.
+
+It is free software, and may be redistributed under the terms specified in the [LICENSE.md](LICENSE.md)

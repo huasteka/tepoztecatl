@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Item API', type: :request do
+  # Initialize authorization header
+  let(:user_id) { Faker::Number.digit }
+  let(:headers) { valid_headers }
+
   # Initialize test data
   let!(:items) { create_list(:item, 10) }
   let(:item_id) { items.first.id }
@@ -9,7 +13,7 @@ RSpec.describe 'Item API', type: :request do
   let(:output_measure_unit) { create(:measure_unit) }
 
   describe 'GET /api/v1/items' do
-    before { get '/api/v1/items' }
+    before { get '/api/v1/items', params: {}, headers: headers }
 
     it 'returns items' do
       expect(json).not_to be_empty
@@ -21,7 +25,7 @@ RSpec.describe 'Item API', type: :request do
   end
 
   describe 'GET /api/v1/items/:item_id' do
-    before { get "/api/v1/items/#{item_id}" }
+    before { get "/api/v1/items/#{item_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the item' do
@@ -53,7 +57,7 @@ RSpec.describe 'Item API', type: :request do
     } }
 
     context 'when the request is valid' do
-      before { post '/api/v1/items', params: valid_attributes }
+      before { post '/api/v1/items', params: valid_attributes, headers: headers }
 
       it 'creates a item' do
         expect(json['result']['code']).to eq('First')
@@ -67,7 +71,7 @@ RSpec.describe 'Item API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/items', params: {code: 'Fail', input_quantity: 1.0, output_quantity: 5.0} }
+      before { post '/api/v1/items', params: {code: 'Fail', input_quantity: 1.0, output_quantity: 5.0}, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -79,7 +83,7 @@ RSpec.describe 'Item API', type: :request do
     let(:valid_attributes) { {name: 'Updated', code: 'Updated'} }
 
     context 'when the record exists' do
-      before { put "/api/v1/items/#{item_id}", params: valid_attributes }
+      before { put "/api/v1/items/#{item_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -92,7 +96,7 @@ RSpec.describe 'Item API', type: :request do
   end
 
   describe 'DELETE /api/v1/items/:item_id' do
-    before { delete "/api/v1/items/#{item_id}" }
+    before { delete "/api/v1/items/#{item_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

@@ -13,9 +13,7 @@ module Response
   end
 
   def json_response(result, status = :ok)
-    response = JsonRepresentation.new
-    response.result = result
-    render json: response, status: status
+    json_response_with_meta(result, nil, status)
   end
 
   def json_response_with_meta(result, meta, status = :ok)

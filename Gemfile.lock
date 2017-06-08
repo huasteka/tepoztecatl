@@ -24,6 +24,11 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_model_serializers (0.10.6)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.2)
     activejob (5.0.3)
       activesupport (= 5.0.3)
       globalid (>= 0.3.6)
@@ -39,8 +44,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
-    bcrypt (3.1.11-x64-mingw32)
     builder (3.2.3)
+    case_transform (0.2)
+      activesupport
     codecov (0.1.10)
       json
       simplecov
@@ -64,6 +70,8 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)
     json (2.1.0)
+    jsonapi-renderer (0.1.2)
+    jwt (1.5.6)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.5)
@@ -155,13 +163,14 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7)
+  active_model_serializers (~> 0.10.0)
   byebug
   codecov
   database_cleaner (= 1.6.1)
   factory_girl_rails (~> 4.0)
   faker (= 1.7.3)
   jbuilder (~> 2.5)
+  jwt (= 1.5.6)
   postgresql (= 1.0.0)
   puma (~> 3.0)
   rails (~> 5.0.2)
