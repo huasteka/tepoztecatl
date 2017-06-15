@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
-  include Response
-  include ExceptionHandler
 
   before_action :set_item, only: [:show, :update, :destroy]
 
   def index
-    @items = Item.all
-    json_response(@items)
+    pagination = Pagination.new params
+    @items = Item.paginate pagination.to_param
+    metadata = JsonResponseMeta.new(pagination.current_page, pagination.page_size, Item.count)
+    json_response_with_meta(@items, metadata)
   end
 
   def create

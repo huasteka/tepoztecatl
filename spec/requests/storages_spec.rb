@@ -9,8 +9,8 @@ RSpec.describe 'Storages API', type: :request do
   let!(:storages) { create_list(:storage, 10) }
   let(:storage_id) { storages.first.id }
 
-  describe 'GET /api/v1/storages' do
-    before { get '/api/v1/storages', params: {}, headers: headers }
+  describe 'GET /api/storages' do
+    before { get '/api/storages', params: {}, headers: headers }
 
     it 'returns storages' do
       expect(json).not_to be_empty
@@ -21,8 +21,8 @@ RSpec.describe 'Storages API', type: :request do
     end
   end
 
-  describe 'GET /api/v1/storages/:storage_id' do
-    before { get "/api/v1/storages/#{storage_id}", params: {}, headers: headers }
+  describe 'GET /api/storages/:storage_id' do
+    before { get "/api/storages/#{storage_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the storage' do
@@ -44,11 +44,11 @@ RSpec.describe 'Storages API', type: :request do
     end
   end
 
-  describe 'POST /api/v1/storages' do
+  describe 'POST /api/storages' do
     let(:valid_attributes) { { code: '10101010', name: 'Test' } }
 
     context 'when the request is valid' do
-      before { post '/api/v1/storages', params: valid_attributes, headers: headers }
+      before { post '/api/storages', params: valid_attributes, headers: headers }
 
       it 'creates a storage' do
         expect(json['result']['code']).to eq('10101010')
@@ -60,7 +60,7 @@ RSpec.describe 'Storages API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/storages', params: { name: 'Fail' }, headers: headers }
+      before { post '/api/storages', params: { name: 'Fail' }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -68,11 +68,11 @@ RSpec.describe 'Storages API', type: :request do
     end
   end
 
-  describe 'PUT /api/v1/storages/:storage_id' do
+  describe 'PUT /api/storages/:storage_id' do
     let(:valid_attributes) { { code: '12121212' } }
 
     context 'when the record exists' do
-      before { put "/api/v1/storages/#{storage_id}", params: valid_attributes, headers: headers }
+      before { put "/api/storages/#{storage_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -84,8 +84,8 @@ RSpec.describe 'Storages API', type: :request do
     end
   end
 
-  describe 'DELETE /api/v1/storages/:storage_id' do
-    before { delete "/api/v1/storages/#{storage_id}", params: {}, headers: headers }
+  describe 'DELETE /api/storages/:storage_id' do
+    before { delete "/api/storages/#{storage_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

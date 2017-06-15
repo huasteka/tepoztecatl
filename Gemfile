@@ -20,6 +20,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# Use Will Paginate to page responses
+gem 'will_paginate', '~> 3.1.0'
 # Use JSON web tokens
 gem 'jwt', '1.5.6'
 

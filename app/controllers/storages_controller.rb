@@ -1,12 +1,12 @@
 class StoragesController < ApplicationController
-  include Response
-  include ExceptionHandler
 
   before_action :set_storage, only: [:show, :update, :destroy]
 
   def index
-    @storages = Storage.all
-    json_response(@storages)
+    pagination = Pagination.new params
+    @storages = Storage.paginate pagination.to_param
+    metadata = JsonResponseMeta.new(pagination.current_page, pagination.page_size, Storage.count)
+    json_response_with_meta(@storages, metadata)
   end
 
   def create

@@ -1,12 +1,12 @@
 class MeasureUnitsController < ApplicationController
-  include Response
-  include ExceptionHandler
 
   before_action :set_measure_unit, only: [:show, :update, :destroy]
 
   def index
-    @measure_units = MeasureUnit.all
-    json_response(@measure_units)
+    pagination = Pagination.new params
+    @measure_units = MeasureUnit.paginate pagination.to_param
+    metadata = JsonResponseMeta.new(pagination.current_page, pagination.page_size, MeasureUnit.count)
+    json_response_with_meta(@measure_units, metadata)
   end
 
   def create
