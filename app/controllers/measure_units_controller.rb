@@ -4,18 +4,17 @@ class MeasureUnitsController < ApplicationController
 
   def index
     pagination = Pagination.new params
-    @measure_units = MeasureUnit.paginate pagination.to_param
-    metadata = JsonResponseMeta.new(pagination.current_page, pagination.page_size, MeasureUnit.count)
-    json_response_with_meta(@measure_units, metadata)
+    @measure_units = MeasureUnit.paginate(pagination.to_param).order({acronym: :asc})
+    render json: @measure_units, meta: {pagination: pagination_meta(@measure_units)}, status: :ok
   end
 
   def create
     @measure_unit = MeasureUnit.create!(measure_unit_params)
-    json_response(@measure_unit, :created)
+    render json: @measure_unit, status: :created
   end
 
   def show
-    json_response(@measure_unit)
+    render json: @measure_unit, status: :ok
   end
 
   def update

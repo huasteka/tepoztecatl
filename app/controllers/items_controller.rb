@@ -4,18 +4,17 @@ class ItemsController < ApplicationController
 
   def index
     pagination = Pagination.new params
-    @items = Item.paginate pagination.to_param
-    metadata = JsonResponseMeta.new(pagination.current_page, pagination.page_size, Item.count)
-    json_response_with_meta(@items, metadata)
+    @items = Item.paginate(pagination.to_param).order({code: :desc})
+    render json: @items, meta: {pagination: pagination_meta(@items)}, each_serializer: SimpleItemSerializer, status: :ok
   end
 
   def create
     @item = Item.create!(item_params)
-    json_response(@item, :created)
+    render json: @item, status: :created
   end
 
   def show
-    json_response(@item)
+    render json: @item, serializer: ItemWithStocksSerializer, status: :ok
   end
 
   def update

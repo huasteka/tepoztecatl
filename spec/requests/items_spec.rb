@@ -30,7 +30,7 @@ RSpec.describe 'Item API', type: :request do
     context 'when the record exists' do
       it 'returns the item' do
         expect(json).not_to be_empty
-        expect(json['result']['id']).to eq(item_id)
+        expect(json['data']['id']).to eq(item_id.to_s)
       end
 
       it 'returns status code 200' do
@@ -60,9 +60,9 @@ RSpec.describe 'Item API', type: :request do
       before { post '/api/items', params: valid_attributes, headers: headers }
 
       it 'creates a item' do
-        expect(json['result']['code']).to eq('First')
-        expect(json['result']['input_quantity']).to eq('1.0')
-        expect(json['result']['output_quantity']).to eq('5.0')
+        expect(json['data']['attributes']['code']).to eq('First')
+        expect(json['data']['attributes']['input_quantity']).to eq('1.0')
+        expect(json['data']['attributes']['output_quantity']).to eq('5.0')
       end
 
       it 'returns status code 201' do

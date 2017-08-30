@@ -4,18 +4,17 @@ class StoragesController < ApplicationController
 
   def index
     pagination = Pagination.new params
-    @storages = Storage.paginate pagination.to_param
-    metadata = JsonResponseMeta.new(pagination.current_page, pagination.page_size, Storage.count)
-    json_response_with_meta(@storages, metadata)
+    @storages = Storage.where({parent_id: nil}).order({code: :asc}).paginate(pagination.to_param)
+    render json: @storages, include: :children, meta: {pagination: pagination_meta(@storages)}, status: :ok
   end
 
   def create
     @storage = Storage.create!(storage_params)
-    json_response(@storage, :created)
+    render json: @storage, status: :created
   end
 
   def show
-    json_response(@storage)
+    render json: @storage, status: :ok
   end
 
   def update
@@ -26,6 +25,13 @@ class StoragesController < ApplicationController
   def destroy
     @storage.destroy
     head :no_content
+  end
+
+  def create_child
+    parent_storage = Storage.find(params[:parent_id])
+    child_storage = parent_storage.children.build(storage_params)
+    parent_storage.save!
+    render json: child_storage, status: :ok
   end
 
   private

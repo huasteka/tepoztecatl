@@ -27,7 +27,7 @@ RSpec.describe 'Measure Units API', type: :request do
     context 'when the record exists' do
       it 'returns the measure_unit' do
         expect(json).not_to be_empty
-        expect(json['result']['id']).to eq(measure_unit_id)
+        expect(json['data']['id']).to eq(measure_unit_id.to_s)
       end
 
       it 'returns status code 200' do
@@ -51,8 +51,8 @@ RSpec.describe 'Measure Units API', type: :request do
       before { post '/api/measure_units', params: valid_attributes, headers: headers }
 
       it 'creates a measure_unit' do
-        expect(json['result']['name']).to eq('First')
-        expect(json['result']['acronym']).to eq('1ST')
+        expect(json['data']['attributes']['name']).to eq('First')
+        expect(json['data']['attributes']['acronym']).to eq('1ST')
       end
 
       it 'returns status code 201' do

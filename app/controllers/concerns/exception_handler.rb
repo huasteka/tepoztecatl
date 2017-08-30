@@ -20,21 +20,25 @@ module ExceptionHandler
   private
 
   def is_unauthorized(exception)
-    send_json_response exception, :unauthorized
-  end
-
-  def is_unprocessable_entity(exception)
-    send_json_response exception, :unprocessable_entity
+    render :json => {:errors => exception.message}, :status => :is_unauthorized
   end
 
   def is_not_found(exception)
-    send_json_response exception, :not_found
+    render :json => {:errors => exception.message}, :status => :not_found
   end
 
-  def send_json_response(exception, status)
-    error = JsonResponseError.new
-    error.message = exception.message
-    errors = [] << error
-    json_response_with_errors(errors, status)
+  def is_unprocessable_entity(exception)
+    render json: serialize_error(exception, :unprocessable_entity), status: :unprocessable_entity
   end
+
+  def serialize_error(exception, status)
+    validation_error_serializer = ValidationErrorSerializer.new(exception)
+    errors = exception.record.errors.details.map do |field, details|
+      details.map do |error_details|
+        validation_error_serializer.serialize(field, error_details[:error], status)
+      end
+    end
+    {errors: errors.flatten}
+  end
+
 end

@@ -20,7 +20,7 @@ RSpec.describe 'Operations API', type: :request do
       before { post '/api/operations/deposit', params: valid_attributes, headers: headers }
 
       it 'adds a quantity of items into the storage' do
-        expect(json['result']['quantity'].to_f).to eq(15.00)
+        expect(json['data']['attributes']['quantity'].to_f).to eq(15.00)
       end
 
       it 'returns status code 201' do
@@ -47,7 +47,7 @@ RSpec.describe 'Operations API', type: :request do
       before { post '/api/operations/withdraw', params: valid_withdraw, headers: headers }
 
       it 'removes a quantity of items into the storage' do
-        expect(json['result']['quantity'].to_f).to eq(5.00)
+        expect(json['data']['attributes']['quantity'].to_f).to eq(5.00)
       end
 
       it 'returns status code 201' do

@@ -5,12 +5,12 @@ class OperationsController < ApplicationController
 
   def deposit
     create_operation(:deposit)
-    json_response @stock, :created
+    render json: @stock, status: :created
   end
 
   def withdraw
     create_operation(:withdraw)
-    json_response @stock, :created
+    render json: @stock, status: :created
   end
 
   def transfer

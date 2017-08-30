@@ -27,7 +27,7 @@ RSpec.describe 'Storages API', type: :request do
     context 'when the record exists' do
       it 'returns the storage' do
         expect(json).not_to be_empty
-        expect(json['result']['id']).to eq(storage_id)
+        expect(json['data']['id']).to eql(storage_id.to_s)
       end
 
       it 'returns status code 200' do
@@ -51,7 +51,7 @@ RSpec.describe 'Storages API', type: :request do
       before { post '/api/storages', params: valid_attributes, headers: headers }
 
       it 'creates a storage' do
-        expect(json['result']['code']).to eq('10101010')
+        expect(json['data']['attributes']['code']).to eq('10101010')
       end
 
       it 'returns status code 201' do
