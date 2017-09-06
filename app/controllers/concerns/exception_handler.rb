@@ -28,17 +28,7 @@ module ExceptionHandler
   end
 
   def is_unprocessable_entity(exception)
-    render json: serialize_error(exception, :unprocessable_entity), status: :unprocessable_entity
-  end
-
-  def serialize_error(exception, status)
-    validation_error_serializer = ValidationErrorSerializer.new(exception)
-    errors = exception.record.errors.details.map do |field, details|
-      details.map do |error_details|
-        validation_error_serializer.serialize(field, error_details[:error], status)
-      end
-    end
-    {errors: errors.flatten}
+    render json: ValidationErrorSerializer.new(exception).serialize(:unprocessable_entity), status: :unprocessable_entity
   end
 
 end

@@ -21,6 +21,8 @@ module Tepoztecatl
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.i18n.available_locales = [:en, :pt]
+    config.i18n.default_locale = :pt
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.

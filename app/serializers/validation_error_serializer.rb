@@ -5,23 +5,25 @@ class ValidationErrorSerializer
     @message = exception.message
   end
 
-  def serialize(field, code, status)
-    {
-        status: Rack::Utils.status_code(status),
-        code: fetch_code(code),
-        title: fetch_title(field),
-        detail: @message
-    }
+  def serialize(status)
+    errors = @record.errors.details.map do |field, details|
+      details.map do |error_details|
+        {
+            status: Rack::Utils.status_code(status),
+            title: fetch_title(field, error_details[:error]),
+            detail: @message
+        }
+      end
+    end
+    {errors: errors.flatten}
   end
 
   private
 
-  def fetch_code(code)
-    I18n.t(code, scope: [:fields, underscored_resource_name], default: code.to_s)
-  end
-
-  def fetch_title(field)
-    I18n.t(field, scope: [:errors, :codes], default: field.to_s)
+  def fetch_title(attribute, message)
+    i18n_attribute = I18n.t(attribute, scope: [:activerecord, :attributes, underscored_resource_name])
+    i18n_message = I18n.t(message, scope: [:errors, :messages])
+    I18n.t(:format, scope: [:errors], attribute: i18n_attribute, message: i18n_message)
   end
 
   def underscored_resource_name
