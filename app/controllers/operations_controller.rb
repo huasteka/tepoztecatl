@@ -1,4 +1,4 @@
-class OperationsController < ApplicationController
+class OperationsController < SecuredApplicationController
   include TransferService
 
   before_action :set_stock, only: [:deposit, :withdraw]

@@ -1,4 +1,4 @@
-class MeasureUnitsController < ApplicationController
+class MeasureUnitsController < SecuredApplicationController
 
   before_action :set_measure_unit, only: [:show, :update, :destroy]
 
@@ -36,4 +36,5 @@ class MeasureUnitsController < ApplicationController
   def set_measure_unit
     @measure_unit = MeasureUnit.find(params[:id])
   end
+
 end

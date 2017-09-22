@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class ItemsController < SecuredApplicationController
 
   before_action :set_item, only: [:show, :update, :destroy]
 
@@ -39,4 +39,5 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
 end

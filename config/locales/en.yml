@@ -20,6 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  exception:
+    messages:
+      not_found: Sorry, %{record} not found.
+      invalid_credential: Invalid credentials
+      invalid_token: Invalid token
+      missing_token: Missing token
+      unauthorized: Unauthorized request
+      expired_token: Sorry, your token has expired
   activerecord:
     errors:
       messages:

@@ -1,4 +1,4 @@
-class StoragesController < ApplicationController
+class StoragesController < SecuredApplicationController
 
   before_action :set_storage, only: [:show, :update, :destroy]
 
@@ -43,4 +43,5 @@ class StoragesController < ApplicationController
   def set_storage
     @storage = Storage.find(params[:id])
   end
+
 end
