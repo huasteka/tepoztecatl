@@ -8,9 +8,10 @@ Rails.application.routes.draw do
     resources :measure_units
     resources :items
     scope :operations do
-      post 'deposit', to: 'operations#deposit', via: :post
-      post 'withdraw', to: 'operations#withdraw', via: :post
-      post 'transfer', to: 'operations#transfer', via: :post
+      post 'stocks/deposit', to: 'operations#deposit', via: :post
+      post 'stocks/withdraw', to: 'operations#withdraw', via: :post
+      post 'stocks/transfer', to: 'operations#transfer', via: :post
+      post 'stocks/:stock_id/set_minimum', to: 'operations#set_minimum_stock', via: :post
     end
   end
 

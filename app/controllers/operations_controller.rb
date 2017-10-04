@@ -2,6 +2,7 @@ class OperationsController < SecuredApplicationController
   include TransferService
 
   before_action :set_stock, only: [:deposit, :withdraw]
+  before_action :set_stock_by_id, only: [:set_minimum_stock]
 
   def deposit
     create_operation(:deposit)
@@ -11,6 +12,12 @@ class OperationsController < SecuredApplicationController
   def withdraw
     create_operation(:withdraw)
     render json: @stock, status: :created
+  end
+
+  def set_minimum_stock
+    @stock.minimum_quantity = params.permit(:minimum_quantity)[:minimum_quantity]
+    @stock.save!
+    head :no_content
   end
 
   def transfer
@@ -35,6 +42,10 @@ class OperationsController < SecuredApplicationController
     params.require(:operation).permit(:storage_id, :item_id, :quantity)
     operation = params[:operation]
     @stock = Stock.find_or_create_stock(operation[:storage_id], operation[:item_id])
+  end
+
+  def set_stock_by_id
+    @stock = Stock.find(params[:stock_id]);
   end
 
 end

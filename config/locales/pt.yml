@@ -46,6 +46,7 @@ pt:
         storage: Armazenamento
         item: Item
         quantity: Quantidade
+        minimum_quantity: Minimo
       operation:
         operation_type: Tipo de operação
         quantity: Quantidade
