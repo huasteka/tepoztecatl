@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :storage do
     code { Faker::Number.number(10) }
     name { Faker::Lorem.word }

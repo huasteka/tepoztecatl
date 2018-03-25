@@ -11,7 +11,7 @@ gem 'rails', '~> 5.0.2'
 # Rails model serializer
 gem 'active_model_serializers', '~> 0.10.0'
 # Use PostgreSQL as the database for Active Record
-gem 'postgresql', '1.0.0'
+gem 'pg', '~> 0.21'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -43,7 +43,7 @@ end
 
 group :test do
   gem 'rake', '12.0.0'
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'factory_bot_rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker', '1.7.3'
   gem 'database_cleaner', '1.6.1'

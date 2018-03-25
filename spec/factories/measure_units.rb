@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :measure_unit do
     name { Faker::Lorem.word }
     sequence(:acronym) { |n| Faker::Lorem.characters(2) + n.to_s }

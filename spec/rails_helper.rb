@@ -65,7 +65,7 @@ RSpec.configure do |config|
   config.include RequestSpecHelper
   config.include ControllerSpecHelper
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

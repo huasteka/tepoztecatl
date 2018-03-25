@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :item do
     sequence(:code) { |n| n }
     input_quantity Faker::Number.decimal(8, 2)
