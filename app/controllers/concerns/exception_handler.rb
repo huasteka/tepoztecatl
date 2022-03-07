@@ -20,11 +20,11 @@ module ExceptionHandler
   private
 
   def is_unauthorized(exception)
-    render :json => {:errors => exception.message}, :status => :is_unauthorized
+    render :json => {:errors => [{:status => 401, :title => exception.message}]}, :status => :unauthorized
   end
 
   def is_not_found(exception)
-    render :json => {:errors => exception.message}, :status => :not_found
+    render :json => {:errors => [{:status => 404, :title => exception.message}]}, :status => :not_found
   end
 
   def is_unprocessable_entity(exception)
