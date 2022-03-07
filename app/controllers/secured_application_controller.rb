@@ -1,3 +1,12 @@
+=begin
+  @apiDefine ResponseLinks
+  @apiSuccess {Object} links
+  @apiSuccess {String} links.self
+  @apiSuccess {String} links.first
+  @apiSuccess {String} links.prev
+  @apiSuccess {String} links.next
+  @apiSuccess {String} links.last
+=end
 class SecuredApplicationController < ApplicationController
 
   before_action :authorize_request

@@ -1,3 +1,10 @@
+=begin
+  @apiDefine ErrorHandler
+  @apiError {Object} errors
+  @apiError {Number} errors.status
+  @apiError {String} errors.title
+  @apiError {String} errors.detail
+=end
 class ValidationErrorSerializer
 
   def initialize(exception)

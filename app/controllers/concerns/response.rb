@@ -1,5 +1,10 @@
 module Response
 
+=begin
+  @apiDefine QueryPagination
+  @apiQuery {Number} [current_page]
+  @apiQuery {Number} [page_size]
+=end
   class Pagination
     DEFAULT_CURRENT_PAGE = 1
     DEFAULT_PAGE_SIZE = 10
@@ -16,6 +21,14 @@ module Response
     end
   end
 
+=begin
+  @apiDefine ResponsePagination
+  @apiSuccess {Object} meta
+  @apiSuccess {Object} meta.pagination
+  @apiSuccess {Number} meta.pagination.current_page
+  @apiSuccess {Number} meta.pagination.total_pages
+  @apiSuccess {Number} meta.pagination.total_items
+=end
   def pagination_meta(object)
     {
         current_page: object.current_page,

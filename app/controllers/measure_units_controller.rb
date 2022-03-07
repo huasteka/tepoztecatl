@@ -8,6 +8,10 @@ class MeasureUnitsController < SecuredApplicationController
   @apiGroup MeasureUnit
   @apiName GetMeasureUnits
   @apiHeader {String} Authorization User generated JWT token
+  @apiUse QueryPagination
+  @apiUse MeasureUnitModel
+  @apiUse ResponseLinks
+  @apiUse ResponsePagination
 =end
   def index
     pagination = Pagination.new params
@@ -21,6 +25,9 @@ class MeasureUnitsController < SecuredApplicationController
   @apiGroup MeasureUnit
   @apiName CreateMeasureUnit
   @apiHeader {String} Authorization Generated JWT token
+  @apiUse MeasureUnitRequestBody
+  @apiUse MeasureUnitModel
+  @apiUse ErrorHandler
 =end
   def create
     @measure_unit = MeasureUnit.create!(measure_unit_params)
@@ -33,6 +40,8 @@ class MeasureUnitsController < SecuredApplicationController
   @apiGroup MeasureUnit
   @apiName GetMeasureUnit
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} measure_unit_id
+  @apiUse MeasureUnitModel
 =end
   def show
     render json: @measure_unit, status: :ok
@@ -44,6 +53,10 @@ class MeasureUnitsController < SecuredApplicationController
   @apiGroup MeasureUnit
   @apiName UpdateMeasureUnit
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} measure_unit_id
+  @apiUse MeasureUnitRequestBody
+  @apiUse MeasureUnitModel
+  @apiUse ErrorHandler
 =end  
   def update
     @measure_unit.update(measure_unit_params)
@@ -56,6 +69,8 @@ class MeasureUnitsController < SecuredApplicationController
   @apiGroup MeasureUnit
   @apiName DeleteMeasureUnit
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} measure_unit_id
+  @apiUse ErrorHandler
 =end
   def destroy
     @measure_unit.destroy
@@ -64,6 +79,11 @@ class MeasureUnitsController < SecuredApplicationController
 
   private
 
+=begin
+  @apiDefine MeasureUnitRequestBody
+  @apiBody {String} name
+  @apiBody {String} acronym
+=end
   def measure_unit_params
     params.permit(:name, :acronym)
   end

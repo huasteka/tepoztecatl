@@ -6,7 +6,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/44e1c70362a53f32662d/test_coverage)](https://codeclimate.com/github/huasteka/tepoztecatl/test_coverage)
 [![Codecov](https://codecov.io/gh/huasteka/tepoztecatl/branch/master/graph/badge.svg)](https://codecov.io/gh/huasteka/tepoztecatl)
 
-Tepoztecatl is an open source simple API for optimal inventory control developed with [Ruby on Rails](http://rubyonrails.org).
+Tepoztecatl is a simple open source API for optimal inventory control, developed with [Ruby on Rails](http://rubyonrails.org).
 
 ## Setup
 

@@ -5,11 +5,14 @@ class OperationsController < SecuredApplicationController
   before_action :set_stock_by_id, only: [:set_minimum_stock]
 
 =begin
-  @api {post} /stocks/deposit Deposit into stock
+  @api {post} /operations/stocks/deposit Deposit into stock
   @apiVersion 1.0.0
-  @apiGroup Stock
+  @apiGroup Operations
   @apiName CreateStockDeposit
   @apiHeader {String} Authorization Generated JWT token
+  @apiUse StockRequestBody
+  @apiUse StockModel
+  @apiUse ErrorHandler
 =end
   def deposit
     create_operation(:deposit)
@@ -17,11 +20,14 @@ class OperationsController < SecuredApplicationController
   end
 
 =begin
-  @api {post} /stocks/withdraw Withdraw from stock
+  @api {post} /operations/stocks/withdraw Withdraw from stock
   @apiVersion 1.0.0
-  @apiGroup Stock
+  @apiGroup Operations
   @apiName CreateStockWithdraw
   @apiHeader {String} Authorization Generated JWT token
+  @apiUse StockRequestBody
+  @apiUse StockModel
+  @apiUse ErrorHandler
 =end
   def withdraw
     create_operation(:withdraw)
@@ -29,11 +35,14 @@ class OperationsController < SecuredApplicationController
   end
 
 =begin
-  @api {post} /stocks/:stock_id/set_minimum Set item stock minimum
+  @api {post} /operations/stocks/:stock_id/set_minimum Set item stock minimum
   @apiVersion 1.0.0
-  @apiGroup Stock
-  @apiName SetStockItem
+  @apiGroup Operations
+  @apiName SetStockItemLimit
   @apiHeader {String} Authorization Generated JWT token
+  @apiParam {Number} stock_id
+  @apiBody {Number} minimum_quantity
+  @apiUse ErrorHandler
 =end
   def set_minimum_stock
     @stock.minimum_quantity = params.permit(:minimum_quantity)[:minimum_quantity]
@@ -42,11 +51,17 @@ class OperationsController < SecuredApplicationController
   end
 
 =begin
-  @api {post} /stocks/transfer Transfer item from stock
+  @api {post} /operations/stocks/transfer Transfer item from stock
   @apiVersion 1.0.0
-  @apiGroup Stock
+  @apiGroup Operations
   @apiName CreateStockTransfer
   @apiHeader {String} Authorization Generated JWT token
+  @apiBody {Object} transfer
+  @apiBody {Number} transfer.from_storage_id
+  @apiBody {Number} transfer.to_storage_id
+  @apiBody {Number} transfer.item_id
+  @apiBody {Number} transfer.quantity
+  @apiUse ErrorHandler
 =end
   def transfer
     params.require(:transfer).permit(:from_storage_id, :to_storage_id, :item_id, :quantity)
@@ -66,6 +81,13 @@ class OperationsController < SecuredApplicationController
     @stock.save!
   end
 
+=begin
+  @apiDefine StockRequestBody
+  @apiBody {Object} operation
+  @apiBody {Number} operation.storage_id
+  @apiBody {Number} operation.item_id
+  @apiBody {Number} operation.quantity
+=end
   def set_stock
     params.require(:operation).permit(:storage_id, :item_id, :quantity)
     operation = params[:operation]

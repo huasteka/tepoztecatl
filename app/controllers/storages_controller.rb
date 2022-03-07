@@ -9,6 +9,10 @@ class StoragesController < SecuredApplicationController
   @apiGroup Storage
   @apiName GetStorages
   @apiHeader {String} Authorization User generated JWT token
+  @apiUse QueryPagination
+  @apiUse StorageModel
+  @apiUse ResponseLinks
+  @apiUse ResponsePagination
 =end
   def index
     pagination = Pagination.new params
@@ -22,6 +26,9 @@ class StoragesController < SecuredApplicationController
   @apiGroup Storage
   @apiName CreateStorage
   @apiHeader {String} Authorization Generated JWT token
+  @apiUse StorageRequestBody
+  @apiUse StorageModel
+  @apiUse ErrorHandler
 =end
   def create
     @storage = Storage.create!(storage_params)
@@ -34,6 +41,8 @@ class StoragesController < SecuredApplicationController
   @apiGroup Storage
   @apiName GetStorage
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} storage_id
+  @apiUse StorageModel
 =end
   def show
     render json: @storage, status: :ok
@@ -45,6 +54,9 @@ class StoragesController < SecuredApplicationController
   @apiGroup Storage
   @apiName UpdateStorage
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} storage_id
+  @apiUse StorageRequestBody
+  @apiUse ErrorHandler
 =end
   def update
     @storage.update(storage_params)
@@ -57,6 +69,8 @@ class StoragesController < SecuredApplicationController
   @apiGroup Storage
   @apiName DeleteStorage
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} storage_id
+  @apiUse ErrorHandler
 =end
   def destroy
     @storage.destroy
@@ -69,6 +83,10 @@ class StoragesController < SecuredApplicationController
   @apiGroup Storage
   @apiName CreateNestedStorage
   @apiHeader {String} Authorization Generated JWT token
+  @apiParam {Number} storage_id
+  @apiUse StorageRequestBody
+  @apiUse StorageModel
+  @apiUse ErrorHandler
 =end
   def create_child
     parent_storage = Storage.find(params[:parent_id])
@@ -79,6 +97,11 @@ class StoragesController < SecuredApplicationController
 
   private
 
+=begin
+  @apiDefine StorageRequestBody
+  @apiBody {String} code
+  @apiBody {String} name
+=end
   def storage_params
     params.permit(:code, :name)
   end
