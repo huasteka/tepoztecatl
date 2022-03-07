@@ -8,6 +8,10 @@ class ItemsController < SecuredApplicationController
   @apiGroup Item
   @apiName GetItems
   @apiHeader {String} Authorization User generated JWT token
+  @apiUse QueryPagination
+  @apiUse SimpleItemModel
+  @apiUse ResponseLinks
+  @apiUse ResponsePagination
 =end
   def index
     pagination = Pagination.new params
@@ -21,6 +25,9 @@ class ItemsController < SecuredApplicationController
   @apiGroup Item
   @apiName CreateItem
   @apiHeader {String} Authorization Generated JWT token
+  @apiUse ItemRequestBody
+  @apiUse ItemModel
+  @apiUse ErrorHandler
 =end
   def create
     @item = Item.create!(item_params)
@@ -33,6 +40,8 @@ class ItemsController < SecuredApplicationController
   @apiGroup Item
   @apiName GetItem
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} item_id
+  @apiUse ItemWithStockModel
 =end
   def show
     render json: @item, serializer: ItemWithStocksSerializer, status: :ok
@@ -44,6 +53,10 @@ class ItemsController < SecuredApplicationController
   @apiGroup Item
   @apiName UpdateItem
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} item_id
+  @apiUse ItemRequestBody
+  @apiUse ItemModel
+  @apiUse ErrorHandler
 =end
   def update
     @item.update(item_params)
@@ -56,6 +69,8 @@ class ItemsController < SecuredApplicationController
   @apiGroup Item
   @apiName DeleteItem
   @apiHeader {String} Authorization User generated JWT token
+  @apiParam {Number} item_id
+  @apiUse ErrorHandler
 =end
   def destroy
     @item.destroy
@@ -64,6 +79,15 @@ class ItemsController < SecuredApplicationController
 
   private
 
+=begin
+  @apiDefine ItemRequestBody
+  @apiBody {String} name
+  @apiBody {String} code
+  @apiBody {Number} input_measure_unit_id
+  @apiBody {Number} input_quantity
+  @apiBody {Number} output_measure_unit_id
+  @apiBody {Number} output_quantity
+=end
   def item_params
     allowed_params = params.permit(:name, :code, :input_quantity, :output_quantity)
     allowed_params[:input_measure_unit] = MeasureUnit.find_by_id(params[:input_measure_unit_id])

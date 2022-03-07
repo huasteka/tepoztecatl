@@ -1,0 +1,7 @@
+{
+  "name": "Tepoztecatl",
+  "version": "1.0.0",
+  "title": "Tepoztecatl",
+  "description": "A simple open source API for optimal inventory control",
+  "url": "https://tepoztecatl.herokuapp.com/api"
+}
