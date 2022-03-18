@@ -84,11 +84,11 @@ class OperationsController < SecuredApplicationController
 =end
   def history
     pagination = Pagination.new params
-    @operations = Operation.joins(stock: [:storage, :item])
-    @operations = @operations.where({stocks: {storage_id: params[:storage_id]}}) if params[:storage_id].present?
-    @operations = @operations.paginate(pagination.to_param).order(created_at: :desc)
-    render json: @operations,
-           meta: {pagination: pagination_meta(@operations)},
+    operations = Operation.joins(stock: [:storage, :item])
+    operations = operations.where({stocks: {storage_id: params[:storage_id]}}) if params[:storage_id].present?
+    operations = operations.paginate(pagination.to_param).order(created_at: :desc)
+    render json: operations,
+           meta: {pagination: pagination_meta(operations)},
            each_serializer: OperationSerializer,
            status: :ok
   end
