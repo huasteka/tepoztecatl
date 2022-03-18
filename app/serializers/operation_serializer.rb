@@ -5,6 +5,7 @@
   @apiSuccess {String} data.type
   @apiSuccess {String} data.attributes.operation_type
   @apiSuccess {Number} data.attributes.quantity
+  @apiSuccess {Date} data.attributes.created_at
   @apiSuccess {Object} data.attributes.stock
   @apiSuccess {Number} data.attributes.stock.minimum_quantity
   @apiSuccess {Object} data.attributes.stock.storage
@@ -17,7 +18,7 @@
   @apiSuccess {String} data.attributes.stock.item.code
 =end
 class OperationSerializer < ActiveModel::Serializer
-  attributes :operation_type, :quantity
+  attributes :operation_type, :quantity, :created_at
 
   attribute :stock do
     {
