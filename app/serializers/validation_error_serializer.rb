@@ -17,7 +17,7 @@ class ValidationErrorSerializer
       details.map do |error_details|
         {
             status: Rack::Utils.status_code(status),
-            title: fetch_title(field, error_details[:error]),
+            title: fetch_title(field, error_details[:error], error_details[:count]),
             detail: @message
         }
       end
@@ -27,10 +27,10 @@ class ValidationErrorSerializer
 
   private
 
-  def fetch_title(attribute, message)
-    i18n_attribute = I18n.t(attribute, scope: [:activerecord, :attributes, underscored_resource_name])
-    i18n_message = I18n.t(message, scope: [:errors, :messages])
-    I18n.t(:format, scope: [:errors], attribute: i18n_attribute, message: i18n_message)
+  def fetch_title(attribute, message, message_count)
+    i18n_attribute = I18n.t attribute, scope: [:activerecord, :attributes, underscored_resource_name]
+    i18n_message = I18n.t message, scope: [:errors, :messages], count: message_count
+    I18n.t :format, scope: [:errors], attribute: i18n_attribute, message: i18n_message
   end
 
   def underscored_resource_name

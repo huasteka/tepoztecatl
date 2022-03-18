@@ -69,6 +69,30 @@ class OperationsController < SecuredApplicationController
     head :no_content
   end
 
+=begin
+  @api {post} /operations/stocks/history Fetch the history of stock operations
+  @apiVersion 1.0.0
+  @apiGroup Operations
+  @apiName FetchOperationHistory
+  @apiHeader {String} Authorization Generated JWT token
+  @apiQuery {Number} [storage_id]
+  @apiUse QueryPagination
+  @apiUse OperationModel
+  @apiUse ResponseLinks
+  @apiUse ResponsePagination
+  @apiUse ErrorHandler
+=end
+  def history
+    pagination = Pagination.new params
+    @operations = Operation.joins(stock: [:storage, :item])
+    @operations = @operations.where({stocks: {storage_id: params[:storage_id]}}) if params[:storage_id].present?
+    @operations = @operations.paginate(pagination.to_param).order(created_at: :desc)
+    render json: @operations,
+           meta: {pagination: pagination_meta(@operations)},
+           each_serializer: OperationSerializer,
+           status: :ok
+  end
+
   private
 
   def create_operation(type)
