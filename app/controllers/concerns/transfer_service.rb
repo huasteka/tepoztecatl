@@ -2,8 +2,9 @@ module TransferService
 
   def handle_transfer(params)
     ActiveRecord::Base.transaction do
-      perform_operation(:withdraw, params[:from_storage_id], params[:item_id], params[:quantity])
-      perform_operation(:deposit, params[:to_storage_id], params[:item_id], params[:quantity])
+      withdraw = perform_operation(:withdraw, params[:from_storage_id], params[:item_id], params[:quantity])
+      deposit = perform_operation(:deposit, params[:to_storage_id], params[:item_id], params[:quantity])
+      Transfer.create!(withdraw_operation: withdraw, deposit_operation: deposit)
     end
   end
 
@@ -18,6 +19,7 @@ module TransferService
       stock.quantity -= operation.quantity
     end
     stock.save!
+    operation
   end
 
 end
