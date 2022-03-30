@@ -10,7 +10,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 # Use PostgreSQL as the database for Active Record
 gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 5.6.2'
+gem 'puma', '~> 5.6.4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.11.2'
 # Use Redis adapter to run Action Cable in production
