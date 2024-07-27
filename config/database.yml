@@ -6,9 +6,10 @@ default: &default
 
 development:
   <<: *default
-  database: tepoztecatl_development
-  username: postgres
-  password: postgres
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 production:
   <<: *default

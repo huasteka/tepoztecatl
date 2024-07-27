@@ -11,11 +11,11 @@ Tepoztecatl is a simple open source API for optimal inventory control, developed
 ## Setup
 
 - [PostgreSQL](http://www.postgresql.org) (>= 9.3)
-- [Ruby](https://www.ruby-lang.org/en) (>= 2.2.4)
+- [Ruby](https://www.ruby-lang.org/en) (>= 2.7.3)
 
 After installing **Ruby**, open a terminal and run this command to install [Bundler](http://bundler.io/):
 
-```
+```sh
 gem install bundler
 ```
 
@@ -23,7 +23,7 @@ gem install bundler
 
 To download and build the project, open a terminal and execute:
 
-```
+```sh
 git clone https://github.com/huasteka/tepoztecatl.git
 cd tepoztecatl
 bundle install
@@ -35,7 +35,7 @@ To serve the project run: `rails s` the application will be served at `http://lo
 
 To configure database credentials modify `config/database.yml` file:
 
-```
+```yml
 [environment]:
   <<: *default
   database: [database_name]
@@ -43,12 +43,26 @@ To configure database credentials modify `config/database.yml` file:
   password: [database_password]
 ```
 
+To run the database migrations, open a terminal and execute:
+
+```sh
+rake db:migrate
+```
+
 ## Tests
 
 To execute all tests, open a terminal and execute:
 
-```
+```sh
 bundle exec rspec
+```
+
+## Run
+
+To run the application, open a terminal and execute:
+
+```sh
+rails s
 ```
 
 ## License
