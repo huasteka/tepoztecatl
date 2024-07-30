@@ -34,14 +34,13 @@ jobs:
       - checkout
       - ruby/install-deps
       - run:
-          name: "Install Dependencies"
-          command: bundle install
-      - run:
           name: "Wait for PostgreSQL"
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: "Migrate database"
-          command: bundle exec rails db:migrate
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:migrate
       - run:
           name: "Generate Coverage Report"
           command: bundle exec rspec

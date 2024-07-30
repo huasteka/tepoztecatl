@@ -13,6 +13,7 @@ development:
 
 production:
   <<: *default
+  host: <%= ENV['DATABASE_HOST'] %>
   database: <%= ENV['DATABASE_NAME'] %>
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
@@ -22,6 +23,7 @@ production:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  host: localhost
   database: tepoztecatl_test
   username: postgres
   password:
