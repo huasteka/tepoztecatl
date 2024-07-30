@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ruby:2.7.3-alpine
+FROM ruby:2.7.8-alpine
 
 RUN apk add --update alpine-sdk postgresql-dev
 
