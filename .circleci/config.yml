@@ -2,30 +2,60 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  ruby: circleci/ruby@2.1.3
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  say-hello:
+  build-and-test:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/executor-intro/ & https://circleci.com/docs/configuration-reference/#executor-job
     docker:
       # Specify the version you desire here
       # See: https://circleci.com/developer/images/image/cimg/base
-      - image: cimg/base:current
+      - image: cimg/ruby:2.7
+      - image: cimg/postgres:9.6
+        environment:
+          POSTGRES_DB: tepoztecatl_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ""
+
+    environment:
+      BUNDLE_JOBS: 3
+      BUNDLE_RETRY: 3
+      RAILS_ENV: test
+      CC_TEST_REPORTER_ID: fff203f25986e5d5426514c1e334a1d5099c644e449c526c657210422931dd40
 
     # Add steps to the job
     # See: https://circleci.com/docs/jobs-steps/#steps-overview & https://circleci.com/docs/configuration-reference/#steps
     steps:
       # Checkout the code as the first step.
       - checkout
+      - ruby/install-deps
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "Wait for PostgreSQL"
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: "Migrate database"
+          command: bundle exec rails db:migrate
+      - run:
+          name: "Generate Coverage Report"
+          command: bundle exec rspec
+      - run:
+          name: "Setup Code Climate"
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: "Upload Coverage Report"
+          command: |
+            ./cc-test-reporter upload-coverage -i ./coverage/codecov-result.json
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
+  build-and-test-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - say-hello
+      - build-and-test
