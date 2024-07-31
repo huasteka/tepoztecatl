@@ -43,7 +43,7 @@ group :test do
   gem 'faker', '1.7.3'
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'database_cleaner', '1.6.1'
-  gem 'simplecov', require: false, group: :test
+  gem 'simplecov', '~> 0.17.1', require: false, group: :test
   gem 'simplecov-json', require: false, group: :test
 end
 
