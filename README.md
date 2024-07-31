@@ -1,10 +1,8 @@
 # Tepoztecatl
 
-[![Travis](https://img.shields.io/travis/huasteka/tepoztecatl.svg?style=flat-square)](https://travis-ci.org/huasteka/tepoztecatl)
-[![GitHub issues](https://img.shields.io/github/issues/huasteka/tepoztecatl.svg?style=flat-square)](https://github.com/huasteka/tepoztecatl/issues)
-[![Maintainability](https://api.codeclimate.com/v1/badges/44e1c70362a53f32662d/maintainability)](https://codeclimate.com/github/huasteka/tepoztecatl/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/44e1c70362a53f32662d/test_coverage)](https://codeclimate.com/github/huasteka/tepoztecatl/test_coverage)
-[![Codecov](https://codecov.io/gh/huasteka/tepoztecatl/branch/master/graph/badge.svg)](https://codecov.io/gh/huasteka/tepoztecatl)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/huasteka/tepoztecatl/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/huasteka/tepoztecatl/tree/master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/20fea2a0d1588db0cae9/maintainability)](https://codeclimate.com/github/huasteka/tepoztecatl/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/20fea2a0d1588db0cae9/test_coverage)](https://codeclimate.com/github/huasteka/tepoztecatl/test_coverage)
 
 Tepoztecatl is a simple open source API for optimal inventory control, developed with [Ruby on Rails](http://rubyonrails.org).
 
@@ -46,6 +44,7 @@ To configure database credentials modify `config/database.yml` file:
 To run the database migrations, open a terminal and execute:
 
 ```sh
+rake db:create
 rake db:migrate
 ```
 
