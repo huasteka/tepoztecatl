@@ -88,7 +88,6 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    json (2.7.2)
     jsonapi-renderer (0.2.2)
     jwt (1.5.6)
     loofah (2.22.0)
@@ -178,14 +177,12 @@ GEM
     rspec-support (3.13.1)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
-    simplecov (0.17.1)
+    simplecov (0.22.0)
       docile (~> 1.1)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.2)
-    simplecov-json (0.2.3)
-      json
-      simplecov
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -226,8 +223,8 @@ DEPENDENCIES
   rake (= 13.0.1)
   rspec-rails (~> 5.0.1)
   shoulda-matchers (~> 4.5.1)
-  simplecov (~> 0.17.1)
-  simplecov-json
+  simplecov
+  simplecov_json_formatter
   tzinfo-data
   will_paginate (~> 3.3.0)
 
