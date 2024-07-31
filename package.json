@@ -3,9 +3,12 @@
   "name": "tepoztecatl",
   "version": "1.0.0",
   "description": "An open source simple API for optimal inventory control",
+  "bin": {
+    "apidoc": "./node_modules/.bin/apidoc"
+  },
   "scripts": {
     "postinstall": "npm run apidoc",
-    "apidoc": "./node_modules/.bin/apidoc -i ./app/controllers ./app/serializers -o ./public"
+    "apidoc": "apidoc -i ./app/controllers ./app/serializers -o ./public"
   },
   "license": "GPL-3.0-only",
   "repository": {

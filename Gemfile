@@ -43,7 +43,8 @@ group :test do
   gem 'faker', '1.7.3'
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'database_cleaner', '1.6.1'
-  gem 'codecov', :require => false
+  gem 'simplecov', require: false, group: :test
+  gem 'simplecov_json_formatter', require: false, group: :test
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

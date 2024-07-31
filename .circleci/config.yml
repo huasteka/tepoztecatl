@@ -52,7 +52,7 @@ jobs:
       - run:
           name: "Upload Coverage Report"
           command: |
-            ./cc-test-reporter upload-coverage -i ./coverage/codecov-result.json
+            ./cc-test-reporter upload-coverage -i ./coverage/coverage.json
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
