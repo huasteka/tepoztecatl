@@ -22,7 +22,7 @@ RUN bundle install --no-cache
 
 RUN npm install && npm cache clean --force
 
-RUN rm -rf /tmp/pids/server.pid
+RUN rm -rf ${APP_HOME}/tmp/pids/server.pid
 
 EXPOSE 3000
 
