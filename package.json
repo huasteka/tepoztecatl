@@ -16,6 +16,6 @@
     "url": "https://github.com/huasteka/tepoztecatl.git"
   },
   "dependencies": {
-    "apidoc": "~0.50.1"
+    "apidoc": "~1.2.0"
   }
 }
